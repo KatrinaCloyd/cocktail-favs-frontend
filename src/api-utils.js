@@ -1,6 +1,5 @@
 import request from 'superagent';
 const URL = 'https://cocktail-backend321321.herokuapp.com/';
-const API = 'https://www.thecocktaildb.com/api/json/v1/1/';
 
 export async function signInUser(email, password) {
     const response = await request
@@ -45,14 +44,14 @@ export async function deleteFave(favId, token) {
 
 export async function searchByName(search) {
     const response = await request
-        .get(`${API}filter.php?i=${search}`)
+        .get(`${URL}searchbyname?search=${search}`)
 
     return response.body;
 }
 
 export async function searchByIng(search) {
     const response = await request
-        .get(`${API}lookup.php?i=${search}`)
+        .get(`${URL}searchbying?search=${search}`)
 
     return response.body;
 }

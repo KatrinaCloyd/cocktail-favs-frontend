@@ -1,0 +1,28 @@
+.drink-list{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.drink-card{
+    display:flex;
+    flex-direction: column;
+    align-content: center;
+    width: 220px;
+    border: 2px solid #fca311;
+    border-radius: 3px;
+    margin: 10px;
+    padding: 10px;
+}
+.drink-img{
+    max-width: 200px;
+}
+
+h4{
+    margin: 15px 0px;
+}
+button{
+    margin: 10px;
+    align-self: center;
+}
