@@ -5,9 +5,9 @@ import './header.css'
 export default class Header extends Component {
     render() {
         return (
-            <div>
-                <h2>I NEED A DRINK!</h2>
-                <div>
+            <div className='header'>
+                <h1>I NEED A DRINK!</h1>
+                <div className='linklist'>
                     <NavLink to="/cocktail-search">Find A Cocktail</NavLink>
                     <NavLink to="/favorite">Your Favorite Cocktails</NavLink>
                     <NavLink to="/login">Log In / Sign Up</NavLink>
