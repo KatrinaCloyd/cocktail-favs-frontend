@@ -7,7 +7,9 @@ export default class LoginSignUpPage extends Component {
         returningEmail: '',
         returningPassword: '',
         newEmail: '',
-        newPassword: ''
+        newPassword: '',
+        newerror: '',
+        reterror: ''
     }
 
     handleRetEmailChange = (e) => {
@@ -18,11 +20,16 @@ export default class LoginSignUpPage extends Component {
     }
     handleRetUserSubmit = async (e) => {
         e.preventDefault();
-        const user = await signInUser(this.state.returningEmail, this.state.returningPassword);
-        const token = user.token;
-        this.props.handleUserChange(token);
-        this.props.history.push('/cocktail-search');
+        try {
+            const user = await signInUser(this.state.returningEmail, this.state.returningPassword);
+            const token = user.token;
+            this.props.handleUserChange(token);
+            this.props.history.push('/cocktail-search');
+        } catch {
+            this.setState({ reterror: 'Incorrect email or password' })
+        }
     }
+
     handleNewEmailChange = (e) => {
         this.setState({ newEmail: e.target.value })
     }
@@ -31,10 +38,14 @@ export default class LoginSignUpPage extends Component {
     }
     handleNewUserSubmit = async (e) => {
         e.preventDefault();
-        const user = await signUpUser(this.state.newEmail, this.state.newPassword);
-        const token = user.token;
-        this.props.handleUserChange(token);
-        this.props.history.push('/cocktail-search');
+        try {
+            const user = await signUpUser(this.state.newEmail, this.state.newPassword);
+            const token = user.token;
+            this.props.handleUserChange(token);
+            this.props.history.push('/cocktail-search');
+        } catch {
+            this.setState({ newerror: 'That email address is already signed up!' })
+        }
     }
 
     render() {
@@ -44,6 +55,7 @@ export default class LoginSignUpPage extends Component {
                 <form onSubmit={this.handleRetUserSubmit}>
                     <h3>RETURNING USERS PLEASE LOG IN </h3>
                     <p>Enter your email address and password and we can get your list of favorite cocktails and searching for more!</p>
+                    {this.state.reterror && <h4> {this.state.reterror}</h4>}
                     <label>
                         Email Address:
                         <input value={this.state.returningEmail}
@@ -60,6 +72,7 @@ export default class LoginSignUpPage extends Component {
                 <form onSubmit={this.handleNewUserSubmit}>
                     <h3>NEW USERS PLEASE SIGN UP! </h3>
                     <p>Simply enter an email and address to create your account then you can start searching for cocktails right away!</p>
+                    {this.state.newerror && <h4> {this.state.newerror}</h4>}
                     <label>
                         Email Address:
                         <input value={this.state.newEmail}
