@@ -5,6 +5,7 @@
 /* 
 dark navy: #0a111f
 navy: #14213d
+light navy: #1e325c
 gold: #fca311
 light grey: #d6d6d6
 whiteish: #f9f9f9 
@@ -12,11 +13,13 @@ whiteish: #f9f9f9
 
 h1, h2{
   font-family: 'Fascinate';
-  color: #14213d;
-  margin: 40px;
+  color: #1e325c;
+  margin: 30px;
 }
 
-.main{
-  color: #14213d;
+.main-section{
+  color: #1e325c;;
   padding: 10px;
+  width: 80%;
+  margin: auto;
 }

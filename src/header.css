@@ -29,9 +29,6 @@ a{
     box-shadow: 1px 1px 3px #14213d ;
 }
 
-h1, h2 {
-    font-family: 'Fascinate';
-    color: #14213d;
-    margin: 40px;
+h1{
+    font-size: 40px;
 }
-

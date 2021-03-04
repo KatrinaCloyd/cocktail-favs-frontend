@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Header from './Header.js'
 import Home from './Home.js'
 import LoginSignUpPage from './LoginSignUpPage.js'
@@ -11,12 +7,24 @@ import CocktailSearch from './CocktailSearch.js'
 import FavoritesList from './FavoritesList.js'
 import FavoriteDetailPage from './FavoriteDetailPage.js'
 import './App.css';
+import { getLocalStorage, setLocalStorage } from './local-storage-utils.js'
 
 export default class App extends Component {
+
+  state = {
+    token: getLocalStorage()
+    // token: ''
+  }
+
+  handleUserChange = (token) => {
+    this.setState({ token: token })
+    setLocalStorage(token);
+  }
 
   handleLogout = () => {
     this.handleUserChange();
   }
+
 
   render() {
     return (
@@ -27,27 +35,32 @@ export default class App extends Component {
             <Route
               path="/"
               exact
-              render={(routerProps) => <Home {...routerProps} />}
+              render={(routerProps) =>
+                <Home {...routerProps} />}
             />
             <Route
               path="/login"
               exact
-              render={(routerProps) => <LoginSignUpPage {...routerProps} />}
+              render={(routerProps) =>
+                <LoginSignUpPage handleUserChange={this.handleUserChange} {...routerProps} />}
             />
             <Route
               path="/cocktail-search"
               exact
-              render={(routerProps) => <CocktailSearch {...routerProps} />}
+              render={(routerProps) =>
+                <CocktailSearch {...routerProps} />}
             />
             <Route
               path="/favorite"
               exact
-              render={(routerProps) => <FavoritesList {...routerProps} />}
+              render={(routerProps) =>
+                <FavoritesList {...routerProps} />}
             />
             <Route
               path="/favorite-detail"
               exact
-              render={(routerProps) => <FavoriteDetailPage {...routerProps} />}
+              render={(routerProps) =>
+                <FavoriteDetailPage {...routerProps} />}
             />
           </Switch>
         </Router>
