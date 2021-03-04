@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import PrivateRoute from './PrivateRoute.js';
 import Header from './Header.js'
 import Home from './Home.js'
 import LoginSignUpPage from './LoginSignUpPage.js'
@@ -30,7 +31,8 @@ export default class App extends Component {
     return (
       <div>
         <Router>
-          <Header handleLogout={this.handleLogout} />
+          <Header
+            token={this.state.token} handleLogout={this.handleLogout} />
           <Switch>
             <Route
               path="/"
@@ -44,17 +46,19 @@ export default class App extends Component {
               render={(routerProps) =>
                 <LoginSignUpPage handleUserChange={this.handleUserChange} {...routerProps} />}
             />
-            <Route
+            <PrivateRoute
               path="/cocktail-search"
               exact
+              token={this.state.token}
               render={(routerProps) =>
-                <CocktailSearch {...routerProps} />}
+                <CocktailSearch token={this.state.token} {...routerProps} />}
             />
-            <Route
+            <PrivateRoute
               path="/favorite"
               exact
+              token={this.state.token}
               render={(routerProps) =>
-                <FavoritesList {...routerProps} />}
+                <FavoritesList token={this.state.token} {...routerProps} />}
             />
             <Route
               path="/favorite-detail"

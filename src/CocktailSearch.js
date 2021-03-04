@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { searchByName, searchByIng } from './api-utils.js'
+import { searchByName, searchByIng, addFavorite, getUserFavs } from './api-utils.js'
 import './search-page.css'
 
 
@@ -8,7 +8,17 @@ export default class CocktailSearch extends Component {
         results: [],
         nameSearch: '',
         ingSearch: '',
-        error: ''
+        error: '',
+        favorites: []
+    }
+
+    componentDidMount = async () => {
+        await this.getFavs();
+    }
+
+    getFavs = async () => {
+        const favs = await getUserFavs(this.props.token);
+        this.setState({ favorites: favs })
     }
 
     handleNameSearchChange = (e) => {
@@ -37,7 +47,20 @@ export default class CocktailSearch extends Component {
         }
     }
 
+    handleAddToFavsClick = async (drink) => {
+        await addFavorite(drink.strDrink, drink.idDrink, drink.strDrinkThumb, drink.strIngredient1, this.props.token);
+
+        await this.getFavs();
+    }
+
+    alreadyAFav = (drinkId) => {
+        const isFaved = this.state.favorites.find(fav => fav.drink_id === Number(drinkId));
+        return isFaved;
+    }
+
     render() {
+        console.log(this.state);
+
         console.log(this.state);
         return (
             <div>
@@ -52,7 +75,6 @@ export default class CocktailSearch extends Component {
                         </label>
                         <button>Search!</button>
                     </form>
-
                     <form onSubmit={this.handleIngSearchSubmit}>
                         <h3>Search by cocktail <br /> INGREDIENT</h3>
                         {this.state.error && <h4> {this.state.error}</h4>}
@@ -73,7 +95,10 @@ export default class CocktailSearch extends Component {
                     {this.state.results.map(drink =>
                         <div key={drink.idDrink} className='drink-card'>
                             <h4 className='drink-name'>{drink.strDrink}</h4>
-                            <button>Heart</button>
+                            {this.alreadyAFav(drink.idDrink) ?
+                                <h5>A Favorite!</h5> :
+                                <button onClick={() => this.handleAddToFavsClick(drink)}>Save to Favs</button>}
+
                             <img className='drink-img' src={drink.strDrinkThumb} alt='cocktail' />
                         </div>
                     )}
