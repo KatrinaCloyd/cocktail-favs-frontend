@@ -35,7 +35,29 @@ h4{
 h5{
   font-family: 'Fascinate';
   color:#fca311;
-  font-size: 20px;
+  font-size: 22px;
   text-align: center;
-  margin: 2px 0px 12px 0px;
+  margin: 10px 0px 28px 0px;
+}
+
+.recipe{
+    display:flex;
+    color: #1e325c; 
+    flex-direction: column;
+    align-content: center;
+    width: 75%;
+    border: 2px solid #fca311;
+    border-radius: 3px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.recipe-img{
+    width: 300px;
+    align-self: center;
+}
+
+ul{
+    text-align: center;
+    list-style-type: none;
 }

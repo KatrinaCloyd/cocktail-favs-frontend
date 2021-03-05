@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import { getUserFavs, deleteFave } from './api-utils.js'
 
 
@@ -32,7 +33,7 @@ export default class FavoritesList extends Component {
                             <h4 className='drink-name'>{drink.name}</h4>
                             <h5>A Favorite!</h5>
                             <button onClick={() => this.removeFromFavs(drink.id)}>Remove From Favs</button>
-                            <button>See Full Recipe</button>
+                            <Link className='fake-btn' to={`/favorite-detail/${drink.drink_id}`}>See Full Recipe</Link>
                             <img className='drink-img' src={drink.image} alt='cocktail' />
                         </div>
                     )}

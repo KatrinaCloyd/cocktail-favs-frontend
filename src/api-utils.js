@@ -55,3 +55,11 @@ export async function searchByIng(search) {
 
     return response.body;
 }
+
+export async function searchForSingeDrink(drinkID) {
+    const response = await request
+        .get(`${URL}cocktail?search=${drinkID}`)
+
+    return response.body.drinks[0];
+}
+

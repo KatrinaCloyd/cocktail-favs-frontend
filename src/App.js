@@ -61,7 +61,7 @@ export default class App extends Component {
                 <FavoritesList token={this.state.token} {...routerProps} />}
             />
             <Route
-              path="/favorite-detail"
+              path="/favorite-detail/:id"
               exact
               render={(routerProps) =>
                 <FavoriteDetailPage {...routerProps} />}
