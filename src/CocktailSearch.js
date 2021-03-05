@@ -31,17 +31,22 @@ export default class CocktailSearch extends Component {
         e.preventDefault();
         try {
             const items = await searchByName(this.state.nameSearch);
-            this.setState({ results: items.drinks });
+            this.checkForNoResults(items);
         } catch {
             this.setState({ error: 'Ooops... something went wrong.' })
         }
+    }
+
+    checkForNoResults = (items) => {
+        if (items === {} || !items.drinks) { this.setState({ error: 'Ooops... something went wrong. Try again.' }) }
+        else this.setState({ results: items.drinks, error: '' });
     }
 
     handleIngSearchSubmit = async (e) => {
         e.preventDefault();
         try {
             const items = await searchByIng(this.state.ingSearch);
-            this.setState({ results: items.drinks });
+            this.checkForNoResults(items);
         } catch {
             this.setState({ error: 'Ooops... something went wrong.' })
         }
@@ -65,8 +70,6 @@ export default class CocktailSearch extends Component {
     }
 
     render() {
-        console.log(this.state);
-
         console.log(this.state);
         return (
             <div>

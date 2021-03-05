@@ -22,15 +22,16 @@ export default class FavoritesList extends Component {
     }
 
     render() {
+        console.log(this.state);
         return (
-            <div className='drink-list'>
-                <h2>Here is your favorites list</h2>
+            <div>
+                <h2>Here is your favorites list</h2><br />
                 <div className='drink-list'>
                     {this.state.favorites.map(drink =>
                         <div key={drink.drink_id} className='drink-card'>
                             <h4 className='drink-name'>{drink.name}</h4>
                             <h5>A Favorite!</h5>
-                            <button onClick={() => this.removeFromFavs(drink.drink_id)}>Remove From Favs</button>
+                            <button onClick={() => this.removeFromFavs(drink.id)}>Remove From Favs</button>
                             <button>See Full Recipe</button>
                             <img className='drink-img' src={drink.image} alt='cocktail' />
                         </div>
