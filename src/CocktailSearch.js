@@ -22,10 +22,10 @@ export default class CocktailSearch extends Component {
     }
 
     handleNameSearchChange = (e) => {
-        this.setState({ nameSearch: e.target.value })
+        this.setState({ nameSearch: e.target.value, ingSearch: '' })
     }
     handleIngSearchChange = (e) => {
-        this.setState({ ingSearch: e.target.value })
+        this.setState({ ingSearch: e.target.value, nameSearch: '' })
     }
     handleNameSearchSubmit = async (e) => {
         e.preventDefault();
@@ -47,8 +47,14 @@ export default class CocktailSearch extends Component {
         }
     }
 
+    hasmaining = (drink) => {
+        if (!drink.strIngredient1) { return this.state.ingSearch }
+        else return drink.strIngredient1;
+    }
+
     handleAddToFavsClick = async (drink) => {
-        await addFavorite(drink.strDrink, drink.idDrink, drink.strDrinkThumb, drink.strIngredient1, this.props.token);
+        const mainIng = this.hasmaining(drink);
+        await addFavorite(drink.strDrink, drink.idDrink, drink.strDrinkThumb, mainIng, this.props.token);
 
         await this.getFavs();
     }
