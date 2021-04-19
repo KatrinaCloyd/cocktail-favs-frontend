@@ -1,25 +1,74 @@
-import logo from './logo.svg';
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import PrivateRoute from './PrivateRoute.js';
+import Header from './Header.js'
+import Home from './Home.js'
+import LoginSignUpPage from './LoginSignUpPage.js'
+import CocktailSearch from './CocktailSearch.js'
+import FavoritesList from './FavoritesList.js'
+import FavoriteDetailPage from './FavoriteDetailPage.js'
 import './App.css';
+import { getLocalStorage, setLocalStorage } from './local-storage-utils.js'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+
+  state = {
+    token: getLocalStorage()
+    // token: ''
+  }
+
+  handleUserChange = (token) => {
+    this.setState({ token: token })
+    setLocalStorage(token);
+  }
+
+  handleLogout = () => {
+    this.handleUserChange();
+  }
+
+
+  render() {
+    return (
+      <div>
+        <Router>
+          <Header
+            token={this.state.token} handleLogout={this.handleLogout} />
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={(routerProps) =>
+                <Home {...routerProps} />}
+            />
+            <Route
+              path="/login"
+              exact
+              render={(routerProps) =>
+                <LoginSignUpPage handleUserChange={this.handleUserChange} {...routerProps} />}
+            />
+            <PrivateRoute
+              path="/cocktail-search"
+              exact
+              token={this.state.token}
+              render={(routerProps) =>
+                <CocktailSearch token={this.state.token} {...routerProps} />}
+            />
+            <PrivateRoute
+              path="/favorite"
+              exact
+              token={this.state.token}
+              render={(routerProps) =>
+                <FavoritesList token={this.state.token} {...routerProps} />}
+            />
+            <Route
+              path="/favorite-detail/:id"
+              exact
+              render={(routerProps) =>
+                <FavoriteDetailPage {...routerProps} />}
+            />
+          </Switch>
+        </Router>
+      </div>
+    )
+  }
 }
-
-export default App;
