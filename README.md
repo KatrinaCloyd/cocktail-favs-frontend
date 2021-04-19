@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Cocktail Favorites 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Covid got us all needing a drink! And getting bored with our standard go-tos. So let's find you some new cocktail recipes to give a try! 
 
 ## Available Scripts
 
