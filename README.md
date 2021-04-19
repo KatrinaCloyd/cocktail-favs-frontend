@@ -9,6 +9,7 @@ This page is built in javascript, using React and React Router. This page allows
 ### Resources
 
 This page uses the CocktailDB API for all images and recipes: [https://www.thecocktaildb.com/api.php](https://www.thecocktaildb.com/api.php)
+
 Also relies on my own back end DB for saving all user account information, and saved favroites. 
 
 Built using the Create Ract App bootstrap. 
