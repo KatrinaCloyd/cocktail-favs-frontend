@@ -18,3 +18,10 @@ Built using the Create Ract App bootstrap.
 ### Deployment
 
 This page is still under construction so the deployed site is currently being served off the dev branch. All currently functional code can be found there. 
+
+
+### To Do
+
+- Add full recipe button to search result grid  
+- Add measuerments to recipe card 
+- Add conditional to login link in header to hide when user is loged in
