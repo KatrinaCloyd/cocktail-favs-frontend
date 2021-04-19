@@ -10,7 +10,7 @@ This page is built in javascript, using React and React Router. This page allows
 
 This page uses the CocktailDB API for all images and recipes: [https://www.thecocktaildb.com/api.php](https://www.thecocktaildb.com/api.php)
 
-Also relies on my own back end DB for saving all user account information, and saved favroites. 
+Also relies on my own back end DB for saving all user account information, and saved favroites.  
 Back End Repo: [https://github.com/KatrinaCloyd/favorite-cocktails-backend](https://github.com/KatrinaCloyd/favorite-cocktails-backend)
 
 Built using the Create Ract App bootstrap. 
